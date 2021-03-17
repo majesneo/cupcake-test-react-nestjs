@@ -5,6 +5,7 @@ import { MarketStateThirdService } from './market-state-third.service';
 import { MarketStateFirstController } from './market-state-first.controller';
 import { MarketStateSecondController } from './market-state-second.controller';
 import { MarketStateThirdController } from './market-state-third.controller';
+import { AppGateway } from './app.gateway';
 
 @Module({
   imports: [],
@@ -17,6 +18,7 @@ import { MarketStateThirdController } from './market-state-third.controller';
     MarketStateFirstService,
     MarketStateSecondService,
     MarketStateThirdService,
+    AppGateway,
   ],
 })
 export class AppModule {}
