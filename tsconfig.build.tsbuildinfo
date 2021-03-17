@@ -1621,11 +1621,6 @@
         "signature": "62309f23ab3a0cc42ffe8b433b12d80e8e1acc8c84107d5aa1659a7d20bb7000",
         "affectsGlobalScope": false
       },
-      "./src/server/app.gateway.ts": {
-        "version": "1b6a087743ca477c8111713f0a5ae917d4b17dd0e44026850b8d3aaf1fd6eafb",
-        "signature": "ca7987a755130144ed2dc154ade181b31f2894b9db6ae81a5a506a469c2d0458",
-        "affectsGlobalScope": false
-      },
       "./src/server/market-state-rates.vm.ts": {
         "version": "f451e2f65caebaf071e68df7aa6a54807fc8f7ff8c07ff669a4b0d4dd9181bc3",
         "signature": "df24aeedfcd89169bab3db4c9cb536254f4c97a3fe78790196d590cc84bdf541",
@@ -2529,6 +2524,11 @@
       "./src/server/market-state-third.service.ts": {
         "version": "07e65240958594a545a36aa48a33878bd07fff2d176526dfc0859b9b67f4902b",
         "signature": "21b767980717d8e37cacec1733ef134bde9134601f55f4299a152ca0e8bef8f8",
+        "affectsGlobalScope": false
+      },
+      "./src/server/app.gateway.ts": {
+        "version": "ae1216ee0ce8797d191b8e1f2be3e6269afd44b194c69d32a7651750d72d4b85",
+        "signature": "f9f25a181ee4d951fdd5c2266584b88fd27fb12c137614270c629075d336d78d",
         "affectsGlobalScope": false
       },
       "./node_modules/@nestjs/swagger/dist/decorators/api-basic.decorator.d.ts": {
@@ -5536,7 +5536,10 @@
       "./src/server/app.gateway.ts": [
         "./node_modules/@nestjs/common/index.d.ts",
         "./node_modules/@nestjs/websockets/index.d.ts",
-        "./node_modules/socket.io/dist/index.d.ts"
+        "./node_modules/socket.io/dist/index.d.ts",
+        "./src/server/market-state-first.service.ts",
+        "./src/server/market-state-second.service.ts",
+        "./src/server/market-state-third.service.ts"
       ],
       "./src/server/app.module.ts": [
         "./node_modules/@nestjs/common/index.d.ts",
@@ -7845,7 +7848,7 @@
       ],
       "./src/server/app.gateway.ts": [
         "./node_modules/@nestjs/websockets/index.d.ts",
-        "./node_modules/@types/socket.io/index.d.ts"
+        "./node_modules/socket.io/dist/index.d.ts"
       ],
       "./src/server/market-state-first.controller.ts": [
         "./node_modules/rxjs/index.d.ts",

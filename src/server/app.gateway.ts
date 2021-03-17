@@ -7,7 +7,10 @@ import {
   WebSocketServer,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
-import { Logger } from '@nestjs/common';
+import { Inject, Logger } from '@nestjs/common';
+import { MarketStateFirstService } from './market-state-first.service';
+import { MarketStateSecondService } from './market-state-second.service';
+import { MarketStateThirdService } from './market-state-third.service';
 
 @WebSocketGateway(3001)
 export class AppGateway
@@ -15,16 +18,34 @@ export class AppGateway
   @WebSocketServer() server: Server;
   private logger: Logger = new Logger('AppGateway');
 
-  @SubscribeMessage('messageToServer')
-  handleMessage(client: Socket, payload) {
-    this.server.emit('messageToClient', payload, client.id);
+  @Inject()
+  private marketStateFirstService: MarketStateFirstService;
+
+  @Inject()
+  private marketStateSecondService: MarketStateSecondService;
+
+  @Inject()
+  private marketStateThirdService: MarketStateThirdService;
+
+  sendResolvePoll(namePoll, service) {
+    service.getNextState().subscribe((dataPoll) => {
+      if (dataPoll) {
+        this.server.emit(namePoll, dataPoll);
+        this.sendResolvePoll(namePoll, service);
+      }
+    });
   }
-  afterInit(server: Server): any {
+
+  afterInit() {
     this.logger.log('init');
   }
-  handleConnection(client: Socket): any {
+  handleConnection(client: Socket) {
     this.logger.log(`client connected: ${client.id}`);
+    this.sendResolvePoll('sendFirstPoll', this.marketStateFirstService);
+    this.sendResolvePoll('sendSecondPoll', this.marketStateSecondService);
+    this.sendResolvePoll('sendThirdPoll', this.marketStateThirdService);
   }
+
   handleDisconnect(client: any): any {
     this.logger.log(`client disconnected: ${client.id}`);
   }
